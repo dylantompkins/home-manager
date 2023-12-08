@@ -87,15 +87,21 @@ in
   programs.nixvim = {
     enable = true;
 
-    extraPlugins = [ pkgs.vimPlugins.everforest ];
+    extraPlugins = with pkgs.vimPlugins; [
+      everforest
+      friendly-snippets
+    ];
     colorscheme = "everforest";
 
-    clipboard.register = "unnamedplus";
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
 
     plugins = {
       alpha = {
         enable = true;
-	      iconsEnabled = true;
+        iconsEnabled = true;
       };
       vimtex.enable = true;
       treesitter.enable = true;
@@ -108,7 +114,41 @@ in
           { name = "path"; }
           { name = "luasnip"; }
         ];
+        mapping = {
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<Tab>" = {
+            action = ''
+              function(fallback)
+                if cmp.visible() then
+                  cmp.select_next_item()
+                else
+                  fallback()
+                end
+              end
+            '';
+            modes = [
+              "i"
+              "s"
+            ];
+          };
+        };
+        snippet.expand = "luasnip";
       };
+      lsp = {
+        enable = true;
+        servers = {
+          ltex.enable = true;
+          rnix-lsp.enable = true;
+        };
+      };
+      luasnip = {
+        enable = true;
+        fromVscode = [{ }];
+      };
+      lsp-format.enable = true;
+      neo-tree.enable = true;
+      which-key.enable = true;
+      lualine.enable = true;
     };
 
     options = {
@@ -117,6 +157,8 @@ in
       tabstop = 2;
       shiftwidth = 2;
       expandtab = true;
+      fillchars.eob = " ";
+      ignorecase = true;
     };
   };
 }
