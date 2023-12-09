@@ -176,6 +176,7 @@ in {
       expandtab = true;
       fillchars.eob = " ";
       ignorecase = true;
+      nowrap = true;
     };
   };
 
