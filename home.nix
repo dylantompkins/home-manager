@@ -23,9 +23,10 @@ in {
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfreePredicate = _: true;
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -42,6 +43,8 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    vscode
+    obsidian
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -176,7 +179,7 @@ in {
       expandtab = true;
       fillchars.eob = " ";
       ignorecase = true;
-      nowrap = true;
+      wrap = false;
     };
   };
 
@@ -192,7 +195,11 @@ in {
     xwayland.enable = true;
     enableNvidiaPatches = true;
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "desc:Lenovo Group Limited LEN P32p-20 VNA83LFH,preferred,auto,1.5"
+        "desc:Lenovo Group Limited LEN P32p-20 VNA5WK47,preferred,auto,1.5"
+        ",preferred,auto,auto"
+      ];
 
       # unscale xwayland to make not pixelated
       xwayland = {
