@@ -1,13 +1,8 @@
 {
   config,
-  lib,
   pkgs,
   ...
-}: let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-  });
-in {
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "dylan";
@@ -23,7 +18,14 @@ in {
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  nixpkgs.config.allowUnfreePredicate = _: true;
+  # allow unfree
+  nixpkgs.config.allowUnfree = true;
+
+  # for obsidian
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -43,8 +45,8 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    vscode
     obsidian
+    vscode
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -71,6 +73,10 @@ in {
   #
   # or
   #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
   #  /etc/profiles/per-user/dylan/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
@@ -87,8 +93,6 @@ in {
       cat ~/.nix-profile/etc/profile.d/hm-session-vars.sh | babelfish | source
     '';
   };
-
-  imports = [nixvim.homeManagerModules.nixvim];
 
   programs.nixvim = {
     enable = true;
@@ -193,7 +197,6 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    enableNvidiaPatches = true;
     settings = {
       monitor = [
         "desc:Lenovo Group Limited LEN P32p-20 VNA83LFH,preferred,auto,1.5"
