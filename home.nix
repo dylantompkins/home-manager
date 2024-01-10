@@ -47,6 +47,10 @@
     # '')
     obsidian
     vscode
+    rbw
+    rofi-rbw-wayland
+    pinentry-qt
+    nodejs_20
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -319,11 +323,12 @@
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = [
         "$mainMod, Q, exec, kitty"
+        "$mainMod, S, exec, rofi-rbw"
         "$mainMod, C, killactive, "
         "$mainMod, M, exit, "
         "$mainMod, E, exec, dolphin"
         "$mainMod, V, togglefloating, "
-        "$mainMod, R, exec, wofi --show drun --normal-window"
+        "$mainMod, R, exec, rofi -show drun"
         "$mainMod, L, exec, swaylock"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
