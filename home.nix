@@ -103,6 +103,7 @@
 
     extraPackages = with pkgs; [
       alejandra
+      prettierd
     ];
 
     extraPlugins = with pkgs.vimPlugins; [
@@ -157,6 +158,8 @@
         servers = {
           ltex.enable = true;
           rnix-lsp.enable = true;
+          tsserver.enable = true;
+          eslint.enable = true;
         };
       };
       luasnip = {
@@ -171,12 +174,18 @@
         formattersByFt = {
           tex = ["latexindent"];
           nix = ["alejandra"];
+          typescript = ["prettierd"];
+          typescriptreact = ["prettierd"];
+          javascript = ["prettierd"];
+          javascriptreact = ["prettierd"];
         };
         formatOnSave = {
           timeoutMs = 500;
           lspFallback = true;
         };
       };
+      gitgutter.enable = true;
+      toggleterm.enable = true;
     };
 
     options = {
@@ -189,6 +198,36 @@
       ignorecase = true;
       wrap = false;
     };
+
+    globals.mapleader = " ";
+
+    extraConfigLuaPost = ''
+      local Terminal  = require('toggleterm.terminal').Terminal
+
+      local lazygit = Terminal:new({
+        cmd = "lazygit",
+        dir = "git_dir",
+        direction = "float",
+        float_opts = {
+          border = "curved",
+        },
+        -- function to run on opening the terminal
+        on_open = function(term)
+          vim.cmd("startinsert!")
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+        end,
+        -- function to run on closing the terminal
+        on_close = function(term)
+          vim.cmd("startinsert!")
+        end,
+      })
+
+      function _lazygit_toggle()
+        lazygit:toggle()
+      end
+
+      vim.api.nvim_set_keymap("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+    '';
   };
 
   programs.zathura = {
