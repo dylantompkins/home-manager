@@ -51,6 +51,8 @@
     rofi-rbw-wayland
     pinentry-qt
     nodejs_20
+    discord
+    vieb
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -66,6 +68,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/waybar/config".source = dotfiles/waybar.json;
   };
 
   # Home Manager can also manage your environment variables through
@@ -244,6 +247,8 @@
       monitor = [
         "desc:Lenovo Group Limited LEN P32p-20 VNA83LFH,preferred,auto,1.5"
         "desc:Lenovo Group Limited LEN P32p-20 VNA5WK47,preferred,auto,1.5"
+        "desc:LG Electronics LG ULTRAWIDE 201NTLEK6552,preferred,-3440x0,1"
+        "desc:Chimei Innolux Corporation 0x152A,preferred,0x0,1.5"
         ",preferred,auto,auto"
       ];
 
@@ -414,4 +419,5 @@
       ];
     };
   };
+  programs.waybar.enable = true;
 }
