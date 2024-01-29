@@ -51,8 +51,9 @@
     rofi-rbw-wayland
     pinentry-qt
     nodejs_20
-    discord
-    vieb
+    qutebrowser
+    brightnessctl
+    docker
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -88,6 +89,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    QT_QPA_PLATFORM = "wayland";
   };
 
   # Let Home Manager install and manage itself.
@@ -124,6 +126,7 @@
       alpha = {
         enable = true;
         iconsEnabled = true;
+        theme = "dashboard";
       };
       vimtex.enable = true;
       treesitter.enable = true;
@@ -248,7 +251,7 @@
         "desc:Lenovo Group Limited LEN P32p-20 VNA83LFH,preferred,auto,1.5"
         "desc:Lenovo Group Limited LEN P32p-20 VNA5WK47,preferred,auto,1.5"
         "desc:LG Electronics LG ULTRAWIDE 201NTLEK6552,preferred,-3440x0,1"
-        "desc:Chimei Innolux Corporation 0x152A,preferred,0x0,1.5"
+        "desc:Chimei Innolux Corporation 0x152A,preferred,0x0,1.6"
         ",preferred,auto,auto"
       ];
 
@@ -420,4 +423,12 @@
     };
   };
   programs.waybar.enable = true;
+
+  xdg.desktopEntries = {
+    discord = {
+      name = "Discord";
+      exec = ''qutebrowser --target window ":set tabs.position top" ":set auto_save.session false" app.discord.com'';
+      terminal = false;
+    };
+  };
 }
