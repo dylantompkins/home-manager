@@ -427,7 +427,7 @@
   xdg.desktopEntries = {
     discord = {
       name = "Discord";
-      exec = ''qutebrowser --target window ":set tabs.position top" ":set auto_save.session false" app.discord.com'';
+      exec = ''qutebrowser -B /home/dylan/.local/share/qutebrowser-discord'';
       terminal = false;
     };
   };
