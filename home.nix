@@ -301,7 +301,7 @@
         "col.active_border" = "rgba(7FBBB3ee) rgba(83C092ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
 
-        layout = "dwindle";
+        layout = "master";
       };
 
       decoration = {
@@ -350,6 +350,7 @@
 
       misc = {
         disable_hyprland_logo = true;
+        disable_splash_rendering = true;
       };
 
       # Example per-device config
@@ -379,6 +380,7 @@
         "$mainMod, L, exec, swaylock"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, O, layoutmsg, orientationcycle left center"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
