@@ -377,16 +377,16 @@
         "$mainMod, E, exec, dolphin"
         "$mainMod, V, togglefloating, "
         "$mainMod, R, exec, rofi -show drun"
-        "$mainMod, L, exec, swaylock"
+        "$mainMod, W, exec, swaylock"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
         "$mainMod, O, layoutmsg, orientationcycle left center"
 
         # Move focus with mainMod + arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        "$mainMod, J, layoutmsg, cyclenext"
+        "$mainMod, K, layoutmsg, cycleprev"
+        "$mainMod, L, layoutmsg, swapnext"
+        "$mainMod, H, layoutmsg, swapprev"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
